@@ -1,0 +1,1 @@
+$ErrorActionPreference = 'silentlycontinue';New-Item -ItemType Directory -Force -Path C:\Windows\Temp\Collection;Get-WinEvent -ListLog * -ErrorAction 'silentlycontinue' | where-object {$_.recordcount} | Foreach-Object { get-winevent -LogName $_.logname} | Export-Csv -NoTypeInformation C:\Windows\Temp\Collection\$env:COMPUTERNAME-fullsystem-eventlogs.csv
