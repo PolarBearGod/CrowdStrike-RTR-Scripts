@@ -1,0 +1,3 @@
+Get-ScheduledTask | ForEach-Object { [pscustomobject]@{Server = $env:COMPUTERNAME;Name = $_.TaskName;Path = $_.TaskPath;Description = $_.Description;Author = $_.Author;RunAsUser = $_.Principal.userid; LastRunTime = $(($_ | Get-ScheduledTaskInfo).LastRunTime);LastResult = $(($_ | Get-ScheduledTaskInfo).LastTaskResult);NextRun = $(($_ | Get-ScheduledTaskInfo).NextRunTime);Status = $_.State;Command = $_.Actions.execute;Arguments = $_.Actions.Arguments }};
+# Delete this line and the comment hashes to have this export the contents to the host.
+# | Export-Csv -Path "c:\$env:COMPUTERNAME-schedTasks.csv" -NoTypeInformation
